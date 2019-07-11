@@ -1,0 +1,27 @@
+../css
+{% static '/css
+.css
+.css' %}
+
+../js
+{% static '/js
+.js
+.js' %}
+
+../images
+{% static '/images
+.jpg
+.png
+.gif
+.jpg' %}
+.png' %}
+.gif' %}
+
+
+../img
+{% static '/img
+
+
+../media
+{% static '/media
+

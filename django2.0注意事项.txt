@@ -1,0 +1,48 @@
+Django2.0升级注意事项
+
+关于版本兼容性问题：
+
+Django 2.0支持Python 3.4,3.5和3.6
+
+Django 1.11.x是支持Python 2.7的最后一个版本。
+
+Django 2.0是最后一个支持Python 3.4的版本，并且只支持到2019年4月，到时如果你仍然计划使用Python 3.4，可以用Django 1.11 LTS（支持到2020年4月）。 不过需要注意的是，Python 3.4的使用期限是2019年3月。
+
+https://www.djangoproject.com/weblog/2017/dec/02/django-20-released/
+
+本站的代码升级记录 从django1.10.7升级到2.0.2
+
+1 
+从url到path
+
+from django.conf.urls import url
+from django.urls import path
+2
+
+    from django.core import urlresolvers
+ImportError: cannot import name 'urlresolvers'
+    from django.core.urlresolvers import reverse
+ModuleNotFoundError: No module named 'django.core.urlresolvers'
+from django.urls import reverse
+
+3
+
+    from django.utils.functional import allow_lazy
+ImportError: cannot import name 'allow_lazy'
+from django.utils.functional import keep_lazy as allow_lazy
+
+4
+models.ForeignKey 全部要写 on_delete参数
+
+on_delete=models.CASCADE
+on_delete=models.PROTECT
+on_delete=models.SET_NULL
+5
+
+    if request.user.is_authenticated():
+TypeError: 'bool' object is not callable
+is_authenticated 在django2中改为bool 另 is_anonymous也一样
+
+6 err views 增加exception参数
+
+def my_custom_page_not_found_view(request,exception=None):
