@@ -62,7 +62,7 @@ class LoginView(View):
         if login_form.is_valid():
             user_name = request.POST.get('username', '')
             pass_word = request.POST.get('password', '')
-            user = authenticate(username=user_name, password=pass_word)
+            user = CustomBackend().authenticate(username=user_name, password=pass_word)
             if user:
                 if user.is_active:
                     login(request, user)
